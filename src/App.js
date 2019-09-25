@@ -6,7 +6,8 @@ import Bookshelf from "./containers/Bookshelf";
 
 class App extends Component {
   state = {
-    books: []
+    books: [],
+    bookShelf: []
   };
 
   componentDidMount() {
@@ -20,11 +21,26 @@ class App extends Component {
     });
   }
 
+  bookShelfHandler = event => {
+    let bookFound = this.state.books.find(book => book.img === event.src);
+    if (!this.state.bookShelf.includes(bookFound)) {
+      this.setState({
+        bookShelf: [...this.state.bookShelf, bookFound]
+        // books: [...this.state.books]
+      });
+    }
+
+    console.log("yey", this.state.bookShelf, this.state.books);
+  };
+
   render() {
     return (
       <div className="book-container">
-        <BookList books={this.state.books} />
-        <Bookshelf />
+        <BookList
+          books={this.state.books}
+          bookShelfHandler={this.bookShelfHandler}
+        />
+        <Bookshelf bookShelf={this.state.bookShelf} />
       </div>
     );
   }

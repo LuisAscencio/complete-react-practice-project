@@ -9,7 +9,13 @@ const BookList = props => {
       <Form />
       <ul>
         {props.books.map(book => {
-          return <Book key={book.id} book={book} />;
+          return (
+            <Book
+              key={book.id}
+              book={book}
+              bookShelfHandler={props.bookShelfHandler}
+            />
+          );
         })}
       </ul>
     </div>
