@@ -33,6 +33,19 @@ class App extends Component {
     console.log("yey", this.state.bookShelf, this.state.books);
   };
 
+  bookShelfRemover = event => {
+    let bookFound = this.state.bookShelf.find(book => book.img === event.src);
+    let newArray = this.state.bookShelf.filter(function(book) {
+      return book !== bookFound;
+    });
+    this.setState({
+      bookShelf: newArray
+      // books: [...this.state.books]
+    });
+
+    console.log("removing book", this.state.bookShelf);
+  };
+
   render() {
     return (
       <div className="book-container">
@@ -40,7 +53,10 @@ class App extends Component {
           books={this.state.books}
           bookShelfHandler={this.bookShelfHandler}
         />
-        <Bookshelf bookShelf={this.state.bookShelf} />
+        <Bookshelf
+          bookShelf={this.state.bookShelf}
+          bookShelfHandler={this.bookShelfRemover}
+        />
       </div>
     );
   }
